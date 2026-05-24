@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة عملك · نَسَق</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="assets/styles.css">
+
+<style>
+body { background: var(--ink-1); overflow-x: hidden; min-height: 100vh; }
+
+/* ============ Header ============ */
+.client-header {
+  background: var(--ink-2);
+  border-bottom: 1px solid var(--line);
+  padding: 16px 28px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  backdrop-filter: blur(20px);
+}
+
+.client-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-1);
+}
+
+.client-info {
+  margin-right: 16px;
+  padding-right: 16px;
+  border-right: 1px solid var(--line);
+}
+
+.client-name {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1rem;
+  color: var(--text-1);
+}
+
+.client-sub {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-3);
+}
+
+.client-status {
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--lime-deep);
+  font-weight: 600;
+}
+
+.client-status .live-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--lime-dim);
+  box-shadow: 0 0 10px var(--lime);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.client-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.whatsapp-btn {
+  background: #25D366;
+  color: white;
+  padding: 9px 18px;
+  border-radius: 100px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.88rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.whatsapp-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3); }
+
+/* ============ Content ============ */
+.client-wrap {
+  max-width: 1340px;
+  margin: 0 auto;
+  padding: 32px 28px 80px;
+}
+
+.welcome-row {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.welcome-text h1 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  line-height: 1.2;
+}
+
+.welcome-text p {
+  color: var(--text-3);
+  font-size: 0.95rem;
+  margin-top: 6px;
+}
+
+.last-update {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-3);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--ink-2);
+  padding: 8px 14px;
+  border-radius: 100px;
+  border: 1px solid var(--line-soft);
+}
+
+/* ============ Hero stats ============ */
+.hero-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.hs-card {
+  background: var(--ink-2);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s;
+}
+
+.hs-card:hover { transform: translateY(-2px); }
+
+.hs-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 14px;
+}
+
+.hs-icon {
+  width: 38px; height: 38px;
+  border-radius: 11px;
+  background: rgba(190, 242, 100, 0.18);
+  color: var(--lime-deep);
+  display: grid;
+  place-items: center;
+  font-size: 1.2rem;
+}
+
+.hs-card.amber .hs-icon { background: rgba(217, 119, 6, 0.12); color: var(--amber); }
+.hs-card.sky .hs-icon { background: rgba(2, 132, 199, 0.12); color: var(--sky); }
+.hs-card.rose .hs-icon { background: rgba(220, 38, 38, 0.12); color: var(--rose); }
+
+.hs-delta {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 100px;
+}
+
+.hs-delta.up { color: var(--lime-deep); background: rgba(190, 242, 100, 0.15); }
+.hs-delta.down { color: var(--rose); background: rgba(220, 38, 38, 0.08); }
+
+.hs-value {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+}
+
+.hs-label {
+  font-size: 0.85rem;
+  color: var(--text-3);
+}
+
+/* ============ Main Grid ============ */
+.client-grid {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  gap: 20px;
+}
+
+.panel-card {
+  background: var(--ink-2);
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.panel-head-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.panel-head-row h3 {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.15rem;
+}
+
+/* ============ Conversations ============ */
+.conv-filters {
+  display: flex;
+  gap: 6px;
+  background: var(--ink-3);
+  padding: 4px;
+  border-radius: 100px;
+}
+
+.conv-filter {
+  padding: 6px 12px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  border: none;
+  background: transparent;
+  color: var(--text-3);
+  border-radius: 100px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.15s;
+}
+
+.conv-filter.active {
+  background: var(--text-1);
+  color: var(--lime);
+}
+
+.conv-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: -8px;
+}
+
+.conv-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px;
+  border-radius: 12px;
+  transition: background 0.15s;
+  cursor: pointer;
+}
+
+.conv-item:hover { background: var(--ink-3); }
+
+.conv-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--lime), var(--amber));
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  color: var(--text-1);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.conv-channel {
+  position: absolute;
+  bottom: -2px;
+  left: -2px;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--ink-2);
+  display: grid;
+  place-items: center;
+  font-size: 0.65rem;
+  color: white;
+}
+
+.conv-channel.wa { background: #25D366; }
+.conv-channel.ig { background: linear-gradient(135deg, #FED576, #BC3081); }
+.conv-channel.em { background: #EA4335; }
+.conv-channel.sm { background: var(--text-1); color: var(--lime); }
+
+.conv-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.conv-name-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.conv-name {
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+.conv-time {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-3);
+}
+
+.conv-msg {
+  font-size: 0.85rem;
+  color: var(--text-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.conv-status {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px;
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+}
+
+.conv-status.replied { background: rgba(190, 242, 100, 0.2); color: var(--lime-deep); }
+.conv-status.waiting { background: rgba(217, 119, 6, 0.12); color: var(--amber); }
+.conv-status.needs-you { background: rgba(220, 38, 38, 0.1); color: var(--rose); }
+.conv-status.cold { background: var(--ink-4); color: var(--text-3); }
+
+.conv-status::before {
+  content: ""; width: 6px; height: 6px;
+  border-radius: 50%; background: currentColor;
+}
+
+.conv-status.needs-you::before {
+  animation: pulse-dot 1.5s ease-in-out infinite;
+  box-shadow: 0 0 8px currentColor;
+}
+
+/* ============ Right column ============ */
+.side-panels {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Hot leads */
+.lead-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.lead-item:last-child { border-bottom: none; }
+
+.lead-rank {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  background: var(--ink-3);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 0.85rem;
+  color: var(--text-3);
+  flex-shrink: 0;
+}
+
+.lead-rank.hot { background: var(--lime); color: var(--text-1); }
+
+.lead-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.lead-name {
+  font-weight: 700;
+  font-size: 0.88rem;
+}
+
+.lead-meta {
+  font-size: 0.72rem;
+  color: var(--text-3);
+  margin-top: 2px;
+}
+
+.lead-score {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--lime-deep);
+}
+
+/* Appointments */
+.appt-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.appt-item:last-child { border-bottom: none; }
+
+.appt-time {
+  text-align: center;
+  font-family: var(--font-mono);
+  flex-shrink: 0;
+  background: var(--ink-3);
+  padding: 8px 10px;
+  border-radius: 10px;
+  min-width: 56px;
+}
+
+.appt-time .hh {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-1);
+}
+
+.appt-time .ampm {
+  font-size: 0.65rem;
+  color: var(--text-3);
+}
+
+.appt-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.appt-name {
+  font-weight: 700;
+  font-size: 0.88rem;
+}
+
+.appt-service {
+  font-size: 0.75rem;
+  color: var(--text-3);
+}
+
+.appt-status {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  padding: 2px 8px;
+  border-radius: 100px;
+}
+
+.appt-status.confirmed { background: rgba(190, 242, 100, 0.2); color: var(--lime-deep); }
+.appt-status.pending { background: rgba(217, 119, 6, 0.12); color: var(--amber); }
+
+/* Channels chart */
+.channel-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.channel-row:last-child { margin-bottom: 0; }
+
+.channel-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  color: white;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.channel-bar-wrap {
+  flex: 1;
+  height: 24px;
+  background: var(--ink-3);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.channel-bar {
+  height: 100%;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  color: white;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.channel-count {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.95rem;
+  min-width: 36px;
+  text-align: center;
+}
+
+/* Need help banner */
+.help-banner {
+  background: var(--text-1);
+  color: var(--ink-1);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.help-icon {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: var(--lime);
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.help-text {
+  flex: 1;
+}
+
+.help-text h4 {
+  font-size: 1rem;
+  font-weight: 900;
+  color: var(--ink-1);
+  margin-bottom: 4px;
+}
+
+.help-text p {
+  font-size: 0.85rem;
+  color: rgba(245, 242, 233, 0.7);
+}
+
+/* Action banner */
+.action-required {
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.08), rgba(220, 38, 38, 0.02));
+  border: 1px solid rgba(220, 38, 38, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.action-required .ar-icon {
+  width: 42px; height: 42px;
+  border-radius: 10px;
+  background: var(--rose);
+  color: white;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+.action-required .ar-body { flex: 1; }
+.action-required .ar-body h4 {
+  font-size: 1rem;
+  font-weight: 900;
+  margin-bottom: 4px;
+  color: var(--text-1);
+}
+.action-required .ar-body p {
+  font-size: 0.85rem;
+  color: var(--text-2);
+}
+
+.action-required .ar-btn {
+  background: var(--rose);
+  color: white;
+  padding: 9px 18px;
+  border-radius: 100px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+/* ============ Responsive ============ */
+@media (max-width: 1024px) {
+  .client-grid { grid-template-columns: 1fr; }
+  .hero-stats-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 640px) {
+  .client-wrap { padding: 20px 16px 60px; }
+  .client-header { padding: 14px 16px; }
+  .client-info { display: none; }
+  .hero-stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .hs-card { padding: 16px; }
+  .hs-value { font-size: 1.6rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="client-header">
+  <a href="index.html" class="client-brand">
+    <div class="brand-mark">ن</div>
+  </a>
+
+  <div class="client-info">
+    <div class="client-name">عيادة د. خالد للأسنان</div>
+    <div class="client-sub">الباقة الاحترافية · العميل #٢٤٧</div>
+  </div>
+
+  <div class="client-status">
+    <span class="live-dot"></span>
+    الكل شغّال · فريقنا متابع لشغلك
+  </div>
+
+  <div class="client-actions">
+    <a href="https://wa.me/966500000000" class="whatsapp-btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15"/></svg>
+      تواصل مع فريقنا
+    </a>
+  </div>
+</header>
+
+<!-- ============ CONTENT ============ -->
+<div class="client-wrap">
+
+  <!-- Welcome row -->
+  <div class="welcome-row">
+    <div class="welcome-text">
+      <h1>أهلاً د. خالد <span style="color: var(--lime-deep);">👋</span></h1>
+      <p>هذا ملخّص أعمالك اليوم - فريق نَسَق متابع كل شي</p>
+    </div>
+    <div class="last-update">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/>
+        <polyline points="12 6 12 12 16 14"/>
+      </svg>
+      آخر تحديث: قبل ٣ دقايق
+    </div>
+  </div>
+
+  <!-- Action required banner -->
+  <div class="action-required">
+    <div class="ar-icon">!</div>
+    <div class="ar-body">
+      <h4>٣ حالات حوّلناها لك - تحتاج تدخّلك</h4>
+      <p>عملاء طلبوا التحدث مع المدير مباشرة. ضغطنا "تحويل لك" وفريقنا يعرفك بالتفاصيل في واتسابك.</p>
+    </div>
+    <a href="https://wa.me/966500000000" class="ar-btn">شوف التفاصيل ←</a>
+  </div>
+
+  <!-- Hero stats -->
+  <div class="hero-stats-grid">
+    <div class="hs-card">
+      <div class="hs-head">
+        <div class="hs-icon">💬</div>
+        <div class="hs-delta up">▲ ١٢٪</div>
+      </div>
+      <div class="hs-value">٤٧</div>
+      <div class="hs-label">رسالة اليوم</div>
+    </div>
+
+    <div class="hs-card amber">
+      <div class="hs-head">
+        <div class="hs-icon">📅</div>
+        <div class="hs-delta up">▲ ٢٣٪</div>
+      </div>
+      <div class="hs-value">١٢</div>
+      <div class="hs-label">حجز اليوم</div>
+    </div>
+
+    <div class="hs-card sky">
+      <div class="hs-head">
+        <div class="hs-icon">🔥</div>
+        <div class="hs-delta up">▲ ٤</div>
+      </div>
+      <div class="hs-value">٨</div>
+      <div class="hs-label">عميل حار (جاهز للشراء)</div>
+    </div>
+
+    <div class="hs-card rose">
+      <div class="hs-head">
+        <div class="hs-icon">⚡</div>
+        <div class="hs-delta down">▼ ٨ث</div>
+      </div>
+      <div class="hs-value">٢٨<span style="font-size: 1.2rem;">ث</span></div>
+      <div class="hs-label">معدل سرعة الرد</div>
+    </div>
+  </div>
+
+  <!-- Main grid -->
+  <div class="client-grid">
+
+    <!-- Conversations panel -->
+    <div class="panel-card">
+      <div class="panel-head-row">
+        <h3>المحادثات الأخيرة</h3>
+        <div class="conv-filters">
+          <button class="conv-filter active">الكل (٤٧)</button>
+          <button class="conv-filter">تم الرد (٤٢)</button>
+          <button class="conv-filter">في الانتظار (٢)</button>
+          <button class="conv-filter">يحتاج تدخّلك (٣)</button>
+        </div>
+      </div>
+
+      <div class="conv-list">
+
+        <div class="conv-item">
+          <div class="conv-avatar">س
+            <div class="conv-channel wa">W</div>
+          </div>
+          <div class="conv-body">
+            <div class="conv-name-row">
+              <div class="conv-name">سارة محمد</div>
+              <div class="conv-time">قبل ٢ د</div>
+            </div>
+            <div class="conv-msg">"شكراً للخدمة الرائعة، حجزت موعد بكرة"</div>
+          </div>
+          <span class="conv-status replied">رددنا عليها</span>
+        </div>
+
+        <div class="conv-item">
+          <div class="conv-avatar">خ
+            <div class="conv-channel ig">I</div>
+          </div>
+          <div class="conv-body">
+            <div class="conv-name-row">
+              <div class="conv-name">خالد العتيبي</div>
+              <div class="conv-time">قبل ٥ د</div>
+            </div>
+            <div class="conv-msg">"السلام عليكم، كم سعر تنظيف الأسنان؟"</div>
+          </div>
+          <span class="conv-status replied">رددنا عليه</span>
+        </div>
+
+        <div class="conv-item">
+          <div class="conv-avatar">ن
+            <div class="conv-channel wa">W</div>
+          </div>
+          <div class="conv-body">
+            <div class="conv-name-row">
+              <div class="conv-name">نورة الشمري</div>
+              <div class="conv-time">قبل ٨ د</div>
+            </div>
+            <div class="conv-msg">"أبغى أكلّم الدكتور خالد شخصياً"</div>
+          </div>
+          <span class="conv-status needs-you">حوّلناها لك</span>
+        </div>
+
+        <div class="conv-item">
+          <div class="conv-avatar">م
+            <div class="conv-channel em">G</div>
+          </div>
+          <div class="conv-body">
+            <div class="conv-name-row">
+              <div class="conv-name">محمد القحطاني</div>
+              <div class="conv-time">قبل ١٥ د</div>
+            </div>
+            <div class="conv-msg">"شكراً، شاركت تجربتي مع أصدقائي"</div>
+          </div>
+          <span class="conv-status replied">رددنا عليه</span>
+        </div>
+
+        <div class="conv-item">
+          <div class="conv-avatar">ع
+            <div class="conv-channel wa">W</div>
+          </div>
+          <div class="conv-body">
+            <div class="conv-name-row">
+              <div class="conv-name">عبدالله السعيد</div>
+              <div class="conv-time">قبل ٢٠ د</div>
+            </div>
+            <div class="conv-msg">"عندي حالة طارئة، أبغى أحجز اليوم"</div>
+          </div>
+          <span class="conv-status needs-you">حوّلناها لك</span>
+        </div>
+
+        <div class="conv-item">
+          <div class="conv-avatar">ف
+            <div class="conv-channel ig">I</div>
+          </div>
+          <div class="conv-body">
+            <div class="conv-name-row">
+              <div class="conv-name">فاطمة الحربي</div>
+              <div class="conv-time">قبل ٢٥ د</div>
+            </div>
+            <div class="conv-msg">"يحتاج بصمة اليد؟"</div>
+          </div>
+          <span class="conv-status waiting">نرد الحين</span>
+        </div>
+
+        <div class="conv-item">
+          <div class="conv-avatar">ر
+            <div class="conv-channel wa">W</div>
+          </div>
+          <div class="conv-body">
+            <div class="conv-name-row">
+              <div class="conv-name">ريم العنزي</div>
+              <div class="conv-time">قبل ٣٢ د</div>
+            </div>
+            <div class="conv-msg">"تأكدت من الموعد ٤م الأربعاء"</div>
+          </div>
+          <span class="conv-status replied">رددنا عليها</span>
+        </div>
+
+        <div class="conv-item">
+          <div class="conv-avatar">ت
+            <div class="conv-channel sm">S</div>
+          </div>
+          <div class="conv-body">
+            <div class="conv-name-row">
+              <div class="conv-name">تركي الزهراني</div>
+              <div class="conv-time">قبل ٤٥ د</div>
+            </div>
+            <div class="conv-msg">"وين تقعدون بالضبط؟"</div>
+          </div>
+          <span class="conv-status replied">رددنا عليه</span>
+        </div>
+
+        <div class="conv-item">
+          <div class="conv-avatar">ج
+            <div class="conv-channel wa">W</div>
+          </div>
+          <div class="conv-body">
+            <div class="conv-name-row">
+              <div class="conv-name">جواهر المطيري</div>
+              <div class="conv-time">قبل ١ ساعة</div>
+            </div>
+            <div class="conv-msg">"شكراً لم أعد بحاجة للخدمة"</div>
+          </div>
+          <span class="conv-status cold">خامد</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Side panels -->
+    <div class="side-panels">
+
+      <!-- Hot leads -->
+      <div class="panel-card">
+        <div class="panel-head-row">
+          <h3>🔥 الأكثر اهتماماً</h3>
+          <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-3);">٨ عميل</span>
+        </div>
+
+        <div class="lead-item">
+          <div class="lead-rank hot">١</div>
+          <div class="lead-body">
+            <div class="lead-name">عبدالله السعيد</div>
+            <div class="lead-meta">طلب موعد طوارئ · واتساب</div>
+          </div>
+          <div class="lead-score">٩٨٪</div>
+        </div>
+
+        <div class="lead-item">
+          <div class="lead-rank hot">٢</div>
+          <div class="lead-body">
+            <div class="lead-name">نورة الشمري</div>
+            <div class="lead-meta">طلبت كلام الدكتور · واتساب</div>
+          </div>
+          <div class="lead-score">٩٢٪</div>
+        </div>
+
+        <div class="lead-item">
+          <div class="lead-rank hot">٣</div>
+          <div class="lead-body">
+            <div class="lead-name">سارة محمد</div>
+            <div class="lead-meta">حجزت موعد بكرة · واتساب</div>
+          </div>
+          <div class="lead-score">٨٧٪</div>
+        </div>
+
+        <div class="lead-item">
+          <div class="lead-rank">٤</div>
+          <div class="lead-body">
+            <div class="lead-name">خالد العتيبي</div>
+            <div class="lead-meta">سأل عن السعر · إنستقرام</div>
+          </div>
+          <div class="lead-score">٧٤٪</div>
+        </div>
+
+        <div class="lead-item">
+          <div class="lead-rank">٥</div>
+          <div class="lead-body">
+            <div class="lead-name">فاطمة الحربي</div>
+            <div class="lead-meta">سألت تفاصيل · إنستقرام</div>
+          </div>
+          <div class="lead-score">٦٨٪</div>
+        </div>
+      </div>
+
+      <!-- Today's appointments -->
+      <div class="panel-card">
+        <div class="panel-head-row">
+          <h3>📅 مواعيد اليوم</h3>
+          <span style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-3);">١٢ موعد</span>
+        </div>
+
+        <div class="appt-item">
+          <div class="appt-time">
+            <div class="hh">٩:٠٠</div>
+            <div class="ampm">ص</div>
+          </div>
+          <div class="appt-body">
+            <div class="appt-name">محمد الزهراني</div>
+            <div class="appt-service">تنظيف وفحص دوري</div>
+          </div>
+          <span class="appt-status confirmed">مؤكد</span>
+        </div>
+
+        <div class="appt-item">
+          <div class="appt-time">
+            <div class="hh">١٠:٣٠</div>
+            <div class="ampm">ص</div>
+          </div>
+          <div class="appt-body">
+            <div class="appt-name">سارة العتيبي</div>
+            <div class="appt-service">تبييض الأسنان</div>
+          </div>
+          <span class="appt-status confirmed">مؤكد</span>
+        </div>
+
+        <div class="appt-item">
+          <div class="appt-time">
+            <div class="hh">١:٠٠</div>
+            <div class="ampm">م</div>
+          </div>
+          <div class="appt-body">
+            <div class="appt-name">أحمد القحطاني</div>
+            <div class="appt-service">حشوة + علاج عصب</div>
+          </div>
+          <span class="appt-status pending">في الانتظار</span>
+        </div>
+
+        <div class="appt-item">
+          <div class="appt-time">
+            <div class="hh">٣:٣٠</div>
+            <div class="ampm">م</div>
+          </div>
+          <div class="appt-body">
+            <div class="appt-name">نورة الشمري</div>
+            <div class="appt-service">استشارة تقويم</div>
+          </div>
+          <span class="appt-status confirmed">مؤكد</span>
+        </div>
+      </div>
+
+      <!-- Channels distribution -->
+      <div class="panel-card">
+        <div class="panel-head-row">
+          <h3>📊 توزيع القنوات اليوم</h3>
+        </div>
+
+        <div class="channel-row">
+          <div class="channel-icon" style="background: #25D366;">W</div>
+          <div class="channel-bar-wrap">
+            <div class="channel-bar" style="background: #25D366; width: 85%;">واتساب</div>
+          </div>
+          <div class="channel-count">٢٨</div>
+        </div>
+
+        <div class="channel-row">
+          <div class="channel-icon" style="background: linear-gradient(135deg, #FED576, #BC3081);">I</div>
+          <div class="channel-bar-wrap">
+            <div class="channel-bar" style="background: linear-gradient(90deg, #FED576, #BC3081); width: 45%;">إنستقرام</div>
+          </div>
+          <div class="channel-count">١٢</div>
+        </div>
+
+        <div class="channel-row">
+          <div class="channel-icon" style="background: #EA4335;">G</div>
+          <div class="channel-bar-wrap">
+            <div class="channel-bar" style="background: #EA4335; width: 25%;">إيميل</div>
+          </div>
+          <div class="channel-count">٥</div>
+        </div>
+
+        <div class="channel-row">
+          <div class="channel-icon" style="background: var(--text-1); color: var(--lime);">S</div>
+          <div class="channel-bar-wrap">
+            <div class="channel-bar" style="background: var(--text-1); width: 12%;">SMS</div>
+          </div>
+          <div class="channel-count">٢</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Need help banner -->
+  <div class="help-banner" style="margin-top: 28px;">
+    <div class="help-icon">💬</div>
+    <div class="help-text">
+      <h4>محتاج تغيّر شي؟ نسوي حملة؟ تستفسر؟</h4>
+      <p>راسل فريقنا على واتسابك في أي وقت - نرد خلال دقايق</p>
+    </div>
+    <a href="https://wa.me/966500000000" class="whatsapp-btn" style="background: var(--lime); color: var(--text-1);">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967"/></svg>
+      راسلنا الآن
+    </a>
+  </div>
+
+</div>
+
+<script>
+// Filter buttons interactivity
+document.querySelectorAll('.conv-filter').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.conv-filter').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>
